@@ -13,7 +13,7 @@ This README provides a comprehensive guide to setting up and running Flask appli
 To download the project files from the specified Git repository to your local machine, use the following command:
 
 ```sh
-git clone [https://github.com/sauravkarena/flask.git](https://github.com/sauravkarena/Flask-form-with-ajax.git)
+git clone https://github.com/sauravkarena/Flask-form-with-ajax.git
 ```
 
 ## Creating a Virtual Environment (Recommended)
