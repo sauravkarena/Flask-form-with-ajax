@@ -14,9 +14,6 @@ from dotenv import load_dotenv
 import os
 load_dotenv()
 
-
-
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 app.secret_key = os.getenv('SECRET_KEY')
@@ -24,6 +21,7 @@ app.config['EMAIL_ADDRESS'] = os.getenv('EMAIL_ADDRESS')
 app.config['EMAIL_PASSWORD'] = os.getenv('EMAIL_PASSWORD')
 app.permanent_session_lifetime = timedelta(minutes=30)
 db = SQLAlchemy(app)
+
 india_timezone = timezone('Asia/Kolkata')
 
 #For User 
@@ -199,7 +197,7 @@ def verify():
             email = session['email']
             user = User.query.filter_by(email=email, otp=user_otp).first()
             if user:
-                if user.otp_expires_at > datetime.now(india_timezone):
+                if user.otp_expires_at.astimezone(india_timezone) > datetime.now(india_timezone):
                     user.verified = True
                     db.session.commit()
                     return redirect('/dashboard')
